@@ -20,7 +20,7 @@ from helpers.filters import command
 
 def video_link_getter(url: str):
     yt = YouTube(url)
-    x = yt.streams.filter(file_extension="mp4", res="720p")[0].download("downloads")
+    x = yt.streams.filter(file_extension="mp4", res="1080p")[0].download("downloads")
     return x
 
 ydl_opts = {
@@ -40,7 +40,7 @@ app = Client(
 group_call_factory = GroupCallFactory(app, GroupCallFactory.MTPROTO_CLIENT_TYPE.PYROGRAM)
 
 
-@Client.on_message(command(["vstream", f"vstream@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
+@Client.on_message(command(["stream", f"stream@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
 @authorized_users_only
 async def startvideo(client, m: Message):
     replied = m.reply_to_message
@@ -89,7 +89,7 @@ async def startvideo(client, m: Message):
         await m.reply("💭 please reply to video or video file to stream")
 
 
-@Client.on_message(command(["vstop", f"vstop@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
+@Client.on_message(command(["end", f"end@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
 @authorized_users_only
 async def stopvideo(client, m: Message):
     chat_id = m.chat.id
