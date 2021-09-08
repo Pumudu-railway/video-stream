@@ -20,7 +20,7 @@ from helpers.filters import command
 
 def video_link_getter(url: str):
     yt = YouTube(url)
-    x = yt.streams.filter(file_extension="mp4", res="1080p")[0].download("downloads")
+    x = yt.streams.filter(file_extension="mp4", res="720p")[0].download("downloads")
     return x
 
 ydl_opts = {
