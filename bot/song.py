@@ -224,7 +224,7 @@ def time_to_seconds(times):
     return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(":"))))
 
 
-@Client.on_message(command(["vsong", f"vsong@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
+@Client.on_message(command(["video", f"video@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
 async def vsong(_, message: Message):
     query = ''
     for i in message.command[1:]:
@@ -258,12 +258,11 @@ async def vsong(_, message: Message):
         except Exception as e:
             print(e)
             await k.edit(
-                '❌ **video not found, please give a valid video name.\n\n» if you think this is an error report to '
-                '@VeezSupportGroup**')
+                '❌ **video not found, please give a valid video name.**')
             return
     except Exception as e:
         await k.edit(
-            "💡 **please give a video name too you want to download.**\n\n» for example: `/vsong runaway`"
+            "💡 **please give a video name too you want to download.**"
         )
         print(str(e))
         return
@@ -274,7 +273,7 @@ async def vsong(_, message: Message):
             video_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
         caption = f"🏷 Name: {title}\n💡 Views: `{views}`\n🎧 Request by: {message.from_user.mention()}\n\n⚡ " \
-                  f"__Powered by Veez Music A.I__ "
+                  f"__Powered by Rapunzel__ "
         buttons = InlineKeyboardMarkup([[InlineKeyboardButton("🗑 Close", callback_data="cls")]])
         await k.edit("📤 **uploading file...**")
         await message.reply_video(video_file, caption=caption, duration=duration, thumb=thumb_name,
